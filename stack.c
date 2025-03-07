@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <limits.h>
 
-typedef struct Stack {
+typedef struct Stack { //structure 
     int* data;
     int* minStack;
     int* maxStack;
     int top;
     int capacity;
 } Stack;
-Stack* createStack(int capacity) {
+Stack* createStack(int capacity) { //dynamic arrays 
     Stack* stack = (Stack*)malloc(sizeof(Stack));
     stack->data = (int*)malloc(capacity * sizeof(int));
     stack->minStack = (int*)malloc(capacity * sizeof(int));
@@ -19,7 +19,7 @@ Stack* createStack(int capacity) {
     return stack;
 }
 
-int isEmpty(Stack* stack) {
+int isEmpty(Stack* stack) { 
     return stack->top == -1;
 }
 
@@ -31,13 +31,13 @@ void push(Stack* stack, int x) {
     stack->top++;
     stack->data[stack->top] = x;
 
-    // Update min stack
+    // Updating min stack
     if (stack->top == 0 || x <= stack->minStack[stack->top - 1])
         stack->minStack[stack->top] = x;
     else
         stack->minStack[stack->top] = stack->minStack[stack->top - 1];
 
-    // Update max stack
+    // Updating max stack
     if (stack->top == 0 || x >= stack->maxStack[stack->top - 1])
         stack->maxStack[stack->top] = x;
     else
@@ -82,7 +82,6 @@ void freeStack(Stack* stack) {
 
 int main() {
     Stack* stack = createStack(100);
-
     push(stack, 10);
     push(stack, 5);
     push(stack, 20);
